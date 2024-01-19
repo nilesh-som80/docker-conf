@@ -11,10 +11,10 @@ services:
     image: nginx:latest
     ports:
       - '80:80'
+      - '443:443'
     volumes:
       - static_volume:/path_to_static_files
     depends_on:
       - django
 volumes:
   - static_volume
-
