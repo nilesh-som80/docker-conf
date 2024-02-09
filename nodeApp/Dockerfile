@@ -1,6 +1,9 @@
 FROM node:18-alpine
 
+WORKDIR /app
 
 COPY .  /app
 
-CMD cd /app && npm i && npm run dev
+VOLUME /app
+
+CMD sh /app/bin/start.sh

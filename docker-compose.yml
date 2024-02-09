@@ -5,7 +5,7 @@ services:
     build: ./nodeApp
     volumes:
       - './nodeApp:/app'
-    # command: bash -c /app/nodeApp/bin/start.sh
+    # command: sh /app/bin/start.sh
     depends_on:
       - mongo
     
@@ -20,6 +20,8 @@ services:
       - node_app
   mongo:
     image: mongo:latest
+    volumes:
+      - './mongo/data:/data'
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: pass
