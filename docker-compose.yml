@@ -6,8 +6,8 @@ services:
     volumes:
       - './nodeApp:/app'
     # command: bash -c /app/nodeApp/bin/start.sh
-    expose:
-      - '80'
+    depends_on:
+      - mongo
     
   nginx:
     image: nginx:latest
@@ -15,3 +15,11 @@ services:
       - '80:80'
     volumes:
       - ./nginx/config/:/etc/nginx/conf.d
+    depends_on:
+      - mongo
+      - node_app
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass
