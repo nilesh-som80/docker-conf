@@ -2,3 +2,5 @@
 venv/
 *db*
 certs/
+__pycache__
+static/

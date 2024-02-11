@@ -1,23 +1,23 @@
 version: '3'
 services:
   django:
-    build: 'DjangoApp'
+    image: python:alpine
     expose: 
       - '80'
       # - '443'
-    # command:
-    # volumes:
-      # - static_volume:/path_to_static_files
+    command: sh /app/DjangoApp/preload.sh
+    volumes:
+      - ./DjangoApp:/app/DjangoApp
+      - static_volume:/app/DjangoApp/static/
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     ports:
       - '80:80'
       # - '443:443'
     volumes:
-        - ./nginx/config/:/etc/nginx/conf.d  
-    # volumes:
-      # - static_volume:/path_to_static_files
+        - ./nginx/config/:/etc/nginx/conf.d
+        - static_volume:/app/DjangoApp/static/  
     depends_on:
       - django
-# volumes:
-#   static_volume:
+volumes:
+  static_volume:
